@@ -11,16 +11,30 @@ namespace Exercise_3
             else return recursionFibonachiNumber(d - 1) + recursionFibonachiNumber(d - 2);
         }
 
-        private int cyclicFibonachiNumber(int d)
+        private int cyclicFibonachiNumber(int number)
         {
-
+            int d = 0;
+            //if (d == 0) return  0;
+            //else if (d == 1) return  1;
+            for (int i = 0; i < number; i++)
+            {
+                i = ((i - 1) + (i - 2));
+                Console.WriteLine(i);
+            }
             return d;
         }
 
-        public void Result(int num)
+        public void recursionResult(int num)
         {
             Console.Clear();
             Console.WriteLine($"Рекурсия. Число Фиббоначи {num}-й последовательности = { recursionFibonachiNumber(num)}");
+            Console.ReadKey();
+        }
+
+        public void cyclicResult(int num)
+        {
+            Console.Clear();
+            Console.WriteLine($"Рекурсия. Число Фиббоначи {num}-й последовательности = { cyclicFibonachiNumber(num)}");
             Console.ReadKey();
         }
     }

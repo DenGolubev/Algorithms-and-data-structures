@@ -6,7 +6,8 @@ namespace Exercise_1
     {
         int d = 0;
         int i = 2;
-        public void CheckNumber(int number)
+        bool check = false;
+        public bool CheckNumber(int number)
         {
             while (i < number)
             {
@@ -17,7 +18,11 @@ namespace Exercise_1
                 }
                 else i++;
             }
-            if (d == 0) Console.WriteLine($"Вы ввели простое число {number}");
-            }
+            if (d == 0) check = true;
+            else check = false;
+            return check;
+        }
     }
 }
+//
+//
