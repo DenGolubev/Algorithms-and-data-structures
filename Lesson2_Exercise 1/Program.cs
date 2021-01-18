@@ -5,19 +5,20 @@ namespace Lesson2_Exercise_1
 {
     class Program
     {
+        static MyLinkedList linkedList = new MyLinkedList();
         static void Main(string[] args)
         {
-            int value = 0;
-            MyLinkedList linkedList = new MyLinkedList(value);
-            linkedList.AddNode(1);
-            linkedList.AddNode(2);
-            linkedList.AddNode(3);
-            linkedList.AddNode(4);
-            linkedList.AddNode(5);
+            linkedList.AddNode(10);
+            linkedList.AddNode(250);
+            linkedList.AddNode(34);
+            linkedList.AddNode(41);
+            linkedList.AddNode(58);
             foreach (var item in linkedList)
             {
                 Console.WriteLine(item);
             }
+            Console.WriteLine($"Всего в вашем списке {linkedList.GetCount()} узлов");
+            
             Console.ReadKey();
         }
     }

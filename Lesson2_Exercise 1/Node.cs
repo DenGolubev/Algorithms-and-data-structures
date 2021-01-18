@@ -10,10 +10,11 @@
 
         public Node(int value)
         {
-            var item = new Node(value);
-            NextNode = item;
-            PrevNode = item;
-            Count = 1;
+            Value = value;
+        }
+        public override string ToString()
+        {
+            return Value.ToString();
         }
 
     }

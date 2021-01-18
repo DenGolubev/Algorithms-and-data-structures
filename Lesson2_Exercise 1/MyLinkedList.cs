@@ -3,20 +3,12 @@ using System.Collections;
 
 namespace Lesson2_Exercise_1
 {
-    class MyLinkedList : ILinkedList, IEnumerable
+    class MyLinkedList : ILinkedList
     {
         public int Value { get; set; }
         public Node Tail { get; set; }
         public Node Head { get; set; }
         public int Count { get; set; }
-
-        public MyLinkedList(int value)
-        {
-            var item = new Node(value);
-            Head = item;
-            Tail = item;
-            Count = 1;
-        }
 
         public void AddNode(int value)
         {
@@ -45,7 +37,14 @@ namespace Lesson2_Exercise_1
 
         public int GetCount()
         {
-            throw new NotImplementedException();
+            var currentItem = Head;
+            int counter = 0;
+            while (currentItem != null)
+            {                
+                currentItem = currentItem.NextNode;
+                counter++;
+            }
+            return counter;
         }
 
         public void RemoveNode(int index)
@@ -72,7 +71,7 @@ namespace Lesson2_Exercise_1
         public IEnumerator GetEnumerator()
         {
             var currentItem = Head;
-            while(currentItem != null)
+            while (currentItem != null)
             {
                 yield return currentItem;
                 currentItem = currentItem.NextNode;
