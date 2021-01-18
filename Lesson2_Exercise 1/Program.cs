@@ -18,7 +18,12 @@ namespace Lesson2_Exercise_1
                 Console.WriteLine(item);
             }
             Console.WriteLine($"Всего в вашем списке {linkedList.GetCount()} узлов");
-            
+            Console.WriteLine("Введите элемент для поиска:");
+            Console.WriteLine(linkedList.FindNode(int.Parse(Console.ReadLine())));
+
+            Console.WriteLine("Введите элемент для удаления:");
+            linkedList.RemoveNode(int.Parse(Console.ReadLine()));
+            Console.WriteLine($"Всего в вашем списке {linkedList.GetCount()} узлов");
             Console.ReadKey();
         }
     }

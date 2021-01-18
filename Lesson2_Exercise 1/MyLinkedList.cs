@@ -32,7 +32,16 @@ namespace Lesson2_Exercise_1
 
         public Node FindNode(int searchValue)
         {
-            throw new NotImplementedException();
+            var currentItem = Head;
+            while (currentItem != null)
+            {
+                if (currentItem.Value == searchValue)
+                {
+                    return currentItem;
+                }
+                currentItem = currentItem.NextNode;
+            }
+            return null;
         }
 
         public int GetCount()
@@ -49,7 +58,18 @@ namespace Lesson2_Exercise_1
 
         public void RemoveNode(int index)
         {
-            
+            var currentItem = Head;
+            while (currentItem != null)
+            {
+                if (currentItem.Value == index)
+                {
+                    currentItem.PrevNode.NextNode = currentItem.NextNode;
+                    currentItem.NextNode.PrevNode = currentItem.PrevNode;
+                    Count--;
+                    return;
+                }
+                currentItem = currentItem.NextNode;
+            }
         }
 
         public void RemoveNode(Node node)
