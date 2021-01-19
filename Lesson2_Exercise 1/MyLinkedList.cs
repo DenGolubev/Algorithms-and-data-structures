@@ -27,7 +27,12 @@ namespace Lesson2_Exercise_1
 
         public void AddNodeAfter(Node node, int value)
         {
-            throw new NotImplementedException();
+            var currentNode = Head;
+            while(currentNode.NextNode != null)
+            {
+               node = currentNode.NextNode
+            }
+                        
         }
 
         public Node FindNode(int searchValue)
@@ -74,18 +79,15 @@ namespace Lesson2_Exercise_1
 
         public void RemoveNode(Node node)
         {
-            var currentItem = Head;
-            while(currentItem != null)
+            var currentItem = node;
+            if(currentItem.NextNode == null)
             {
-                if (currentItem.Equals(node))
-                {
-                    currentItem.PrevNode.NextNode = currentItem.NextNode;
-                    currentItem.NextNode.PrevNode = currentItem.PrevNode;
-                    Count--;
-                    return;
-                }
-                currentItem = currentItem.NextNode;
+                node = null;
+                return;
             }
+            node.PrevNode = node.NextNode;
+            node.NextNode = node.PrevNode.NextNode;
+
         }
 
         public IEnumerator GetEnumerator()
