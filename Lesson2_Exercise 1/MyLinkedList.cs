@@ -27,12 +27,10 @@ namespace Lesson2_Exercise_1
 
         public void AddNodeAfter(Node node, int value)
         {
-            var currentNode = Head;
-            while(currentNode.NextNode != null)
-            {
-               node = currentNode.NextNode
-            }
-                        
+            var newNode = new Node(value);
+            var nextItem = node.NextNode;
+            node.NextNode = newNode;
+            newNode.NextNode = nextItem;
         }
 
         public Node FindNode(int searchValue)
@@ -63,17 +61,17 @@ namespace Lesson2_Exercise_1
 
         public void RemoveNode(int index)
         {
-            var currentItem = Head;
-            while (currentItem != null)
+            int newIndex = 0;
+            var newNode = Head;
+            while (newNode != null)
             {
-                if (currentItem.Value == index)
+                if (newIndex == index - 1)
                 {
-                    currentItem.PrevNode.NextNode = currentItem.NextNode;
-                    currentItem.NextNode.PrevNode = currentItem.PrevNode;
-                    Count--;
-                    return;
+                    RemoveNode(newNode);
                 }
-                currentItem = currentItem.NextNode;
+
+                newNode = newNode.NextNode;
+                newIndex++;
             }
         }
 
@@ -87,7 +85,6 @@ namespace Lesson2_Exercise_1
             }
             node.PrevNode = node.NextNode;
             node.NextNode = node.PrevNode.NextNode;
-
         }
 
         public IEnumerator GetEnumerator()
