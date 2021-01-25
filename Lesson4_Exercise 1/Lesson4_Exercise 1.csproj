@@ -252,8 +252,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayData.cs" />
     <Compile Include="Generator.cs" />
+    <Compile Include="PasswordArray.cs" />
+    <Compile Include="PasswordHash.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchData.cs" />

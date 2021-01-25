@@ -12,8 +12,23 @@ namespace Lesson4_Exercise_1
     {
         static void Main(string[] args)
         {
-            SearchData search = new SearchData();
-            search.masSearch(search.GenString());
+            PasswordHash hash = new PasswordHash();
+            PasswordArray array = new PasswordArray(10000);
+            string[] myPass = array.GenStringstoArray();
+            var hashSet = hash.GenStringstoHashSet();
+            for (int i = 0; i < 10; i++)
+            {
+                hashSet = hash.GenStringstoHashSet();
+            }
+            //foreach (var item in myPass)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            foreach (var item in hashSet)
+            {
+                Console.WriteLine(item);
+                Console.ReadKey();
+            }
         }
     }
 }
