@@ -8,10 +8,21 @@ namespace Lesson4_Exercise_1
 {
     class Generator
     {
+        
         Random rnd = new Random();
+        int Capacity { get; set; }
+        int[] masnumber { get; set; }
+        string[] masletters { get; set; }
+        HashSet<string> hashletters { get; set; }
+        public Generator(int capacity)
+        {
+            Capacity = capacity;
+            masnumber = new int[Capacity];
+            masletters = new string[Capacity];
+            hashletters = new HashSet<string>();
+        }
         public int[] GenNumbers(int n_start, int n_end)
         {
-            int[] masnumber = new int[n_end - 10];
             for (int i = 0; i < masnumber.Length; i++)
             {
                 int a = rnd.Next(n_start, n_end);
@@ -24,29 +35,28 @@ namespace Lesson4_Exercise_1
             return masnumber;
         }
 
-        public string[] GenStringstoArray(int n_end)
+        public string[] GenStringstoArray()
         {
-            int length = 10;
-            string[] masletters = new string[n_end];
+            int lengthString = 10; //Длина генерируемой строки
+            
             for (int i = 0; i < masletters.Length; i++)
             {
-                string a = "";
-                for (int y = 0; y < length; y++)
+                string a = ""; //Инициализация пустой строки
+                for (int y = 0; y < lengthString; y++)
                 {
-                    if( y % 3 == 0) a += Convert.ToChar(rnd.Next(65, 88));
-                    else if( y % 2 == 0) a += Convert.ToChar(rnd.Next(97, 122));
-                    else a += Convert.ToChar(rnd.Next(48, 57));
+                    if( y % 3 == 0) a += Convert.ToChar(rnd.Next(65, 88)); //Условие выбора заглавных букв
+                    else if( y % 2 == 0) a += Convert.ToChar(rnd.Next(97, 122));//Условие выбора маленьких букв
+                    else a += Convert.ToChar(rnd.Next(48, 57));//Условие выбора цифр
                 }
-                if (!masletters.Equals(a)) masletters[i] = a;
+                if (!masletters.Equals(a)) masletters[i] = a; //Если найдено совпадение, то счетчик минусуем
                 else i--;                
             }
             return masletters;
         }
 
-        public HashSet<string> GenStringstoHashSet(int n_end)
+        public HashSet<string> GenStringstoHashSet()
         {
-            HashSet<string> hashletters = new HashSet<string>();
-            var mas = GenStringstoArray(n_end);
+            var mas = GenStringstoArray();
             foreach (var item in mas)
             {
                 hashletters.Add(item);

@@ -12,9 +12,8 @@ namespace Lesson4_Exercise_1
     {
         static void Main(string[] args)
         {
-            AddData array = new AddData();
-            array.addNumbertoArray();
-            array.addNumbertoHash();
+            SearchData search = new SearchData();
+            search.masSearch(search.GenString());
         }
     }
 }

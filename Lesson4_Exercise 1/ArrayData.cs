@@ -8,27 +8,18 @@ namespace Lesson4_Exercise_1
 {
     class AddData
     {
-        Generator gen = new Generator();
-        public void addNumbertoArray()
+        Generator gen = new Generator(10000);
+        
+        public string[] addNumbertoArray()
         {
-            int count = 0;
-            var mas = gen.GenStringstoArray(100);
-            foreach (var item in mas)
-            {
-                Console.WriteLine($"Array {++count} {item}");
-            }
-            Console.ReadKey();
+            var mas = gen.GenStringstoArray();
+            return mas;
         }
 
-        public void addNumbertoHash()
+        public HashSet<string> addNumbertoHash()
         {
-            int count = 0;
-            var mas = gen.GenStringstoHashSet(100);
-            foreach (var item in mas)
-            {
-                Console.WriteLine($"Hash {++count} {item}");
-            }
-            Console.ReadKey();
+            var mas = gen.GenStringstoHashSet();
+            return mas;
         }
     }
 }
