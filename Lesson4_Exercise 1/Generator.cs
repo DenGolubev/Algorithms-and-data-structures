@@ -9,7 +9,7 @@ namespace Lesson4_Exercise_1
     class Generator
     {
         Random rnd = new Random();
-        public string GenString(int lengthString)
+        public string GenStringData(int lengthString)
         {
             string a = ""; //Инициализация пустой строки
             for (int y = 0; y < lengthString; y++)
@@ -20,8 +20,6 @@ namespace Lesson4_Exercise_1
             }
             return a;
         }
-
-
 
     }
 }

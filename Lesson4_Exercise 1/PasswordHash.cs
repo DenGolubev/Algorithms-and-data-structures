@@ -10,28 +10,18 @@ namespace Lesson4_Exercise_1
     {
         public string Pass { get; set; }
         Generator generator = new Generator();
+
         
-        public override bool Equals(object obj)
-        {
-            var password = obj as PasswordHash;
-
-            if (password == null)
-                return false;
-
-            return Pass == password.Pass;
-        }
-
-        public override int GetHashCode()
-        {
-            int PassHashCode = Pass?.GetHashCode() ?? 0;
-            return PassHashCode;
-        }
-
         public HashSet<string> GenStringstoHashSet()
         {
             var hashSet = new HashSet<string>();
-            var pass =  generator.GenString(10);
-            hashSet.Add(pass);
+            
+            for (int i = 0; i < 10000; i++)
+            {
+                var pass = generator.GenStringData(10);
+                hashSet.Add(pass);
+            }
+            
             return hashSet;
         }
 
