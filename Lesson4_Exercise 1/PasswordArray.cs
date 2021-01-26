@@ -23,7 +23,7 @@ namespace Lesson4_Exercise_1
         {
             for (int i = 0; i < masletters.Length; i++)
             {
-                string a = generator.GenStringData(10);
+                string a = generator.GenString(10);
                 if (!masletters.Equals(a)) masletters[i] = a; //Если найдено совпадение, то счетчик минусуем
                 else i--;
             }
