@@ -7,25 +7,11 @@ using System.Threading.Tasks;
 
 namespace Lesson4_Exercise_2
 {
-    class TreeNode<T>: IComparable<T> where T: IComparable<T>
+    public class Tree
     {
-        public T Value { get; set; }
-        public TreeNode<T> NodeLeft { get; set; }
-        public TreeNode<T> NodeRight { get; set; }
+        public TreeNode Node;
 
-        public int CompareTo(T other)
-        {
-            return CompareTo(other);
-        }
+       
 
-        public TreeNode<int> Tree(int node)
-        {
-            TreeNode<int> newNode = null;
-            if (node == 0) return null;
-            if (Value == null) return Value = node;
-           
-            return newNode;
-        }
     }
-
 }
