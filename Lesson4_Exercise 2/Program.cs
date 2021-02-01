@@ -8,43 +8,23 @@ namespace Lesson4_Exercise_2
 {
     class Program
     {
-        static TreeNode node = new TreeNode();
-        static Random rnd = new Random();
         static void Main(string[] args)
         {
-            insertValue();
-            Console.WriteLine("Введите число для поиска");
-            bool a = findValue(int.Parse(Console.ReadLine()));
-            Console.WriteLine(a);
-
+            Tree<int> tree = new Tree<int>();
+            tree.Add(8);
+            tree.Add(5);
+            tree.Add(12);
+            tree.Add(3);
+            tree.Add(7);
+            tree.Add(12);
+            tree.Add(10);
+            tree.Add(15);
+            Console.WriteLine("Введите значение узла");
+            int a = int.Parse(Console.ReadLine());
+            tree.Remove(a);
+            Console.WriteLine($"Наличие узла {a} в дереве - {tree.Contains(a)}");
             Console.ReadKey();
         }
-
-        public static void insertValue()
-        {
-            for (int i = 0; i < 15; i++)
-            {
-                int y = rnd.Next(3, 15);
-                if (!node.Value.Equals(y))
-                {
-                    node.Add(y);
-                }
-                else
-                {
-                    i--;
-                }
-
-            }
-            foreach (var item in node)
-            {
-                Console.WriteLine(item);
-            }
-        }
-
-        public static bool findValue(int value)
-        {
-            if (node.Find(value) == null) return false;
-            return true;
-        }
+               
     }
 }

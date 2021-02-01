@@ -7,102 +7,24 @@ using System.Threading.Tasks;
 
 namespace Lesson4_Exercise_2
 {
-    public class TreeNode: IComparable, IEnumerable<int>
+    public class TreeNode<T> : IComparable<T> where T : IComparable<T>
     {
-        public int Value { get; set; }
-        public TreeNode NodeLeft { get; set; }
-        public TreeNode NodeRight { get; set; }
-        public TreeNode NodeRoot { get; set; }
+        public T Value { get; private set; }
+        public TreeNode<T> NodeLeft { get; set; }
+        public TreeNode<T> NodeRight { get; set; }
 
-        public void Add(int value)
+
+        public TreeNode(T value)
         {
-            if (Value == 0 || Value == value)
-            {
-                Value = value;
-                return;
-            }
-            else if (Value > value)
-            {
-                if (NodeLeft == null) NodeLeft = new TreeNode();
-                Add(value, NodeLeft, this);
-            }
-            else
-            {
-                if (NodeRight == null) NodeRight = new TreeNode();
-                Add(value, NodeRight, this);
-            }
-
+            Value = value;
         }
-
-        private void Add(int value, TreeNode node, TreeNode root)
+        public int CompareTo(T value)
         {
-            if (node.Value == 0 || node.Value == value)
-            {
-                node.Value = value;
-                node.NodeRoot = root;
-                return;
-            }
-            if (node.Value > value)
-            {
-                if (node.NodeLeft == null) node.NodeLeft = new TreeNode();
-                Add(value, node.NodeLeft, node);
-            }
-            else
-            {
-                if (node.NodeRight == null) node.NodeRight = new TreeNode();
-                Add(value, node.NodeRight, node);
-            }
+            return Value.CompareTo(value);
         }
-
-        public TreeNode Find(int value)
+        public int CompareNode(TreeNode<T> other)
         {
-            if (Value == value) return this;
-            if (Value > value)
-            {
-                return Find(value, NodeLeft);
-            }
-            return Find(value, NodeRight);
-        }
-
-        public TreeNode Find(int value, TreeNode node)
-        {
-            if (node == null) return null;
-
-            if (node.Value == value) return node;
-            if (node.Value > value)
-            {
-                return Find(value, node.NodeLeft);
-            }
-            return Find(value, node.NodeRight);
-        }
-        public int CompareTo(object obj)
-        {
-            return CompareTo(obj);
-        }
-
-        public IEnumerator<int> GetEnumerator()
-        {
-            if (NodeLeft != null)
-            {
-                foreach (var v in NodeLeft)
-                {
-                    yield return v;
-                }
-            }
-            yield return Value;
-
-            if (NodeRight != null)
-            {
-                foreach (var v in NodeRight)
-                {
-                    yield return v;
-                }
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            yield return this;
+            return Value.CompareTo(other.Value);
         }
     }
 }
