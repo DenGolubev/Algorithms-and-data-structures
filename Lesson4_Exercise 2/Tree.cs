@@ -192,14 +192,76 @@ namespace Lesson4_Exercise_2
         }
         #endregion
 
+        #region Семметричный порядок
+
+        public IEnumerator<T> InOrderTraversal()
+        {
+
+
+            if (Root != null)
+            {
+                // Сохраняем узел в стек 
+
+                Stack<TreeNode<T>> stack = new Stack<TreeNode<T>>();
+                TreeNode<T> current = Root;
+
+                // При перемещении по дереву мы должны отслеживать к какому следующему узлу перейти: к левому или правому потомку.   
+
+                bool goLeftNext = true;
+
+                // Начало. Помещение корня дерева в стек.         
+
+                stack.Push(current);
+
+                while (stack.Count > 0)
+                {
+                    // Если мы переходим влево ...        
+                    if (goLeftNext)
+                    {
+                        // Запись всех левых потомков в стек.                 
+
+                        while (current.NodeLeft != null)
+                        {
+                            stack.Push(current);
+                            current = current.NodeLeft;
+                        }
+                    }
+
+                    // Возврашение самого левого потомка
+
+                    yield return current.Value;
+
+                    // Если у него есть правый потомок 
+
+                    if (current.NodeRight != null)
+                    {
+                        current = current.NodeRight;
+
+                        // Если мы один раз переходим в право, то ложны опять осуществить проход по левой стороне                
+
+                        goLeftNext = true;
+                    }
+                    else
+                    {
+                        // Если правого потомка нет, мы должны извлечь из стека родительский узел
+
+                        current = stack.Pop();
+                        goLeftNext = false;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return InOrderTraversal();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
     }
 }
