@@ -141,7 +141,6 @@ namespace Lesson4_Exercise_2
                 TreeNode<T> leftmost = current.NodeRight.NodeLeft;
                 TreeNode<T> leftmostParent = current.NodeRight;
 
-                // поиск крайнего левого потомка 
                 while (leftmost.NodeLeft != null)
 
                 {
@@ -149,11 +148,7 @@ namespace Lesson4_Exercise_2
                     leftmost = leftmost.NodeLeft;
                 }
 
-                // Правое поддерево крайнего левого узла, становится левым поддеревом его родительского узла.         
                 leftmostParent.NodeLeft = leftmost.NodeLeft;
-
-                // Присваиваем крайнему левому узлу в качестве левого потомка - левый потомок удаляемого узла,
-                // а в качестве правого потомка - правый потомок удаляемого узла. 
 
                 leftmost.NodeLeft = current.NodeLeft;
                 leftmost.NodeRight = current.NodeRight;
@@ -170,20 +165,12 @@ namespace Lesson4_Exercise_2
 
                     if (result > 0)
                     {
-
-                        // Если значение родительского узла(parent), больше значения удаляемого узла (current) -                  
-                        // сделать левого крайнего потомка удаляемого узла(leftmost)  - левым потомком его родителя(parent). 
-
                         parent.NodeLeft = leftmost;
                     }
 
                     else if (result < 0)
 
                     {
-
-                        // Если значение родительского узла(parent), меньше значения удаляемого узла (current) -                  
-                        // сделать левого крайнего потомка удаляемого узла(leftmost) - правым потомком его родителя(parent).
-
                         parent.NodeRight = leftmost;
                     }
                 }
@@ -192,71 +179,123 @@ namespace Lesson4_Exercise_2
         }
         #endregion
 
-        #region Семметричный порядок
+        #region Обход в ширину - BFS
 
-        public IEnumerator<T> InOrderTraversal()
+        public IEnumerator<T> LevelOrder()
         {
 
+            if (Root == null)
+                yield break;
 
-            if (Root != null)
+            var queue = new Queue<TreeNode<T>>();
+            queue.Enqueue(Root);
+
+            while (queue.Count > 0)
             {
-                // Сохраняем узел в стек 
-
-                Stack<TreeNode<T>> stack = new Stack<TreeNode<T>>();
-                TreeNode<T> current = Root;
-
-                // При перемещении по дереву мы должны отслеживать к какому следующему узлу перейти: к левому или правому потомку.   
-
-                bool goLeftNext = true;
-
-                // Начало. Помещение корня дерева в стек.         
-
-                stack.Push(current);
-
-                while (stack.Count > 0)
-                {
-                    // Если мы переходим влево ...        
-                    if (goLeftNext)
-                    {
-                        // Запись всех левых потомков в стек.                 
-
-                        while (current.NodeLeft != null)
-                        {
-                            stack.Push(current);
-                            current = current.NodeLeft;
-                        }
-                    }
-
-                    // Возврашение самого левого потомка
-
-                    yield return current.Value;
-
-                    // Если у него есть правый потомок 
-
-                    if (current.NodeRight != null)
-                    {
-                        current = current.NodeRight;
-
-                        // Если мы один раз переходим в право, то ложны опять осуществить проход по левой стороне                
-
-                        goLeftNext = true;
-                    }
-                    else
-                    {
-                        // Если правого потомка нет, мы должны извлечь из стека родительский узел
-
-                        current = stack.Pop();
-                        goLeftNext = false;
-                    }
-                }
+                var node = queue.Dequeue();
+                yield return node.Value;
+                if (node.NodeLeft != null) queue.Enqueue(node.NodeLeft);
+                if (node.NodeRight != null) queue.Enqueue(node.NodeRight);
             }
+
         }
 
         #endregion
 
+        #region Обход в глубину - DFS - Прямой обход (CLR – center, left, right)
+        public List<T> PreOrder()
+        {
+            if(Root == null)
+            {
+                return new List<T>();
+            }
+            return PreOrder(Root);
+            
+        }
+        
+        private List<T>PreOrder(TreeNode<T> node)
+        {
+            var list = new List<T>();
+            if(node != null)
+            {
+                list.Add(node.Value);
+                if(node.NodeLeft != null)
+                {
+                    list.AddRange(PreOrder(node.NodeLeft));
+                }
+                if (node.NodeRight != null)
+                {
+                    list.AddRange(PreOrder(node.NodeRight));
+                }
+            }
+            return list;
+        }
+        #endregion
+
+        #region Обход в глубину - DFS - Обратный обход (LRC – left, right, center)
+        public List<T> PostOrder()
+        {
+            if (Root == null)
+            {
+                return new List<T>();
+            }
+            return PostOrder(Root);
+
+        }
+
+        private List<T> PostOrder(TreeNode<T> node)
+        {
+            var list = new List<T>();
+            if (node != null)
+            {
+                if (node.NodeLeft != null)
+                {
+                    list.AddRange(PostOrder(node.NodeLeft));
+                }
+                if (node.NodeRight != null)
+                {
+                    list.AddRange(PostOrder(node.NodeRight));
+                }
+                list.Add(node.Value);
+            }
+            return list;
+        }
+        #endregion
+
+        #region Обход в глубину - DFS - Симметричный обход (LCR – left, center, right)
+        public List<T> InfixOrder()
+        {
+            if (Root == null)
+            {
+                return new List<T>();
+            }
+            return InfixOrder(Root);
+
+        }
+
+        private List<T> InfixOrder(TreeNode<T> node)
+        {
+            var list = new List<T>();
+            if (node != null)
+            {
+                if (node.NodeLeft != null)
+                {
+                    list.AddRange(InfixOrder(node.NodeLeft));
+                }
+                list.Add(node.Value);
+                if (node.NodeRight != null)
+                {
+                    list.AddRange(InfixOrder(node.NodeRight));
+                }
+                
+            }
+            return list;
+        }
+        #endregion
+
         public IEnumerator<T> GetEnumerator()
         {
-            return InOrderTraversal();
+            return LevelOrder();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

@@ -26,5 +26,10 @@ namespace Lesson4_Exercise_2
         {
             return Value.CompareTo(other.Value);
         }
+
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
     }
 }
