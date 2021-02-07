@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lesson6_Exercise_1
 {
@@ -47,6 +44,11 @@ namespace Lesson6_Exercise_1
                 Console.WriteLine();
             }
             Console.ReadKey();
+
+            
+            //Осуществляем поиск в глубину
+            var result = graph.DFS(1, matrix);
+            graph.PrintDFS(result);
         }
     }
 }

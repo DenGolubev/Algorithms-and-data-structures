@@ -22,6 +22,29 @@ namespace Lesson6_Exercise_1
             E.Add(edge);
         }
 
+        public HashSet<int> DFS(int index, int[,] matrix)
+        {
+            var list = new HashSet<int>();
+            list.Add(index);
+            for (int j = 0; j < matrix.GetLength(1); j++)
+            {
+                if (matrix[index, j] == 1)
+                {
+                    matrix[index, j] = matrix[j, index] = 0;
+                    list.UnionWith(DFS(j, matrix));
+
+                }
+            }
+            return list;
+        }
+        public void PrintDFS(HashSet<int> result)
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(String.Join(" ", result));
+            Console.ReadKey();
+        }
+
         public int[,] GetMatrix()
         {
             var matrix = new int[V.Count, V.Count];
