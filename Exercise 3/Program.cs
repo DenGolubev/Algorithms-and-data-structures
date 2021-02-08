@@ -9,7 +9,7 @@ namespace Exercise_3
             Console.WriteLine("Введите число:");
             int counter = int.Parse(Console.ReadLine());
             Fibonacci fibnum = new Fibonacci();
-            //fibnum.recursionResult(counter);
+            fibnum.recursionResult(counter);
             fibnum.cyclicResult(counter);
         }
     }
