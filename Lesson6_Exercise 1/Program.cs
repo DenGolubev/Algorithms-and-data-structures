@@ -7,8 +7,9 @@ namespace Lesson6_Exercise_1
     {
         static void Main(string[] args)
         {
-            var graph = new Graph();
+            var graph = new Graph(); // Инициализация Граффа
 
+            #region Создаем Графф
             var v1 = new Vertex(1);
             var v2 = new Vertex(2);
             var v3 = new Vertex(3);
@@ -32,9 +33,15 @@ namespace Lesson6_Exercise_1
             graph.AddE(v2, v6);
             graph.AddE(v6, v5);
             graph.AddE(v5, v6);
+            #endregion
 
-            var matrix = graph.GetMatrix();
+            var matrix = graph.GetMatrix(); //Инициализация массива матрицы межности
 
+            #region Матрица смежности
+
+            Console.WriteLine(new string('-', 50));
+            Console.WriteLine("Матрица смежности");
+            Console.WriteLine();
             for (int i = 0; i < graph.VertexCount; i++)
             {
                 for (int y = 0; y < graph.VertexCount; y++)
@@ -45,10 +52,22 @@ namespace Lesson6_Exercise_1
             }
             Console.ReadKey();
 
-            
-            //Осуществляем поиск в глубину
+            #endregion
+
+            #region Обход в глубину DFS
+
+            Console.WriteLine(new string('-', 50));
+            Console.WriteLine("Обход в глубину DFS");
+            Console.WriteLine();
             var result = graph.DFS(1, matrix);
             graph.PrintDFS(result);
+
+            #endregion
+
+            #region Обход в ширину
+            graph.BFS();
+            #endregion
+
         }
     }
 }
