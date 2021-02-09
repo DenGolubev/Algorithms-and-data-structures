@@ -65,9 +65,13 @@ namespace Lesson6_Exercise_1
             #endregion
 
             #region Обход в ширину
-            graph.BFS();
+            Console.WriteLine(new string('-', 50));
+            Console.WriteLine("Обход в ширину");
+            Console.WriteLine();
+            graph.BFS(1, graph.ToJagged<int>(graph.GetMatrix()));
             #endregion
 
         }
+        
     }
 }
